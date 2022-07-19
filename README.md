@@ -47,9 +47,13 @@ Using [DKMS][2] and the included `dkms.conf` file, one can let the operating sys
 automatically on every new kernel installation:
 
 ```sh
-$ dkms add /path/to/this/repo
-$ dkms status
-broadcom-wl, 6.30.223.271: added
+$ DRV_NAME=broadcom-wl
+$ DRV_VERSION=6.30.223.271
+$ cd /PATH/2/ARCHIVE
+$ sudo cp -r . /usr/src/${DRV_NAME}-${DRV_VERSION}
+$ sudo dkms add -m ${DRV_NAME} -v ${DRV_VERSION}
+$ sudo dkms build -m ${DRV_NAME} -v ${DRV_VERSION}
+$ sudo dkms install -m ${DRV_NAME} -v ${DRV_VERSION}
 ```
 
 Providing that the `dkms` service is enabled, the module should appear as *installed* in the list of modules managed by
